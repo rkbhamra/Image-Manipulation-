@@ -46,14 +46,16 @@ class HistogramEqualization:
         avg_img_array = self.average_image(img_array)  
         pixel_counts = self.count_pixels(avg_img_array)  
         probabilities = self.calc_probability(pixel_counts)  
+
         s = []
-        s.append(round((len(probabilities)-1) * probabilities[0]))
+        s.append(((len(probabilities)-1) * probabilities[0]))
         for i in range(1, len(probabilities)):
-            s.append(round(((len(probabilities)-1) * probabilities[i]) + s[i-1]))
+            s.append((((len(probabilities)-1) * probabilities[i]) + s[i-1]))
+        print("S",s)
 
         for i in range(avg_img_array.shape[0]):
             for j in range(avg_img_array.shape[1]):
-                avg_img_array[i][j] = np.clip(s[int(avg_img_array[i][j])], 0, 255)
+                avg_img_array[i][j] = round(s[int(avg_img_array[i][j])])#, 0, 255)
         return avg_img_array
 
     def apply_equalization(self):
