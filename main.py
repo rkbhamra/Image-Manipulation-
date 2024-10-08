@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np 
 import matplotlib.pyplot as plt
+from negativefunc import negativefunc
 
 img = Image.open('img1.png')
 img_array = np.array(img)
@@ -17,15 +18,8 @@ print(f"Image array shape: {img_array.shape}")
         return img_array
 '''
     
-def average_pixels(img_array2):
-    img_array3 = img_array2
-    for i in range(len(img_array3)):
-        for j in range(len(img_array3[i])):
-            for k in range(len(img_array3[i][j])):
-                img_array[i][j][k] = 255-img_array3[i][j][k]
-    return img_array3
 
-averaged_image = average_pixels(img_array)
+averaged_image = negativefunc.negative_image(img_array)
 
 
 
@@ -39,3 +33,4 @@ plt.colorbar(pixel_plot)
 plt.savefig('pixel_plot.png')
 
 plt.show()
+
